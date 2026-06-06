@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tawali | Contact Us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#0A3D62;--navy-dark:#072d48;--navy-mid:#0d4f7c;
+  --gold:#F1C40F;--gold-dark:#C9A80C;--gold-pale:#fef9e2;
+  --white:#ffffff;--off-white:#f7f8fa;--text:#1a2b3c;
+  --text-muted:#5a7286;--border:#e2e8f0;
+  --radius-sm:8px;--radius-md:12px;--radius-lg:20px;--radius-xl:28px;
+  --font-display:'Sora',sans-serif;--font-body:'Plus Jakarta Sans',sans-serif;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.05);
+  --shadow-md:0 4px 16px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.05);
+  --shadow-lg:0 10px 40px rgba(0,0,0,.1),0 4px 12px rgba(0,0,0,.06);
+}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--off-white);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}ul{list-style:none;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.anim-1{animation:fadeUp .6s ease both;}
+.anim-2{animation:fadeUp .6s .1s ease both;}
+.anim-3{animation:fadeUp .6s .2s ease both;}
+
+/* ─── NAVBAR ────────────────────────────────────────── */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 56px;height:68px;
+  transition:box-shadow .3s;
+}
+nav.scrolled{box-shadow:var(--shadow-md);}
+
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.nav-logo-fallback{
+  color:var(--gold);font-family:var(--font-display);
+  font-size:22px;font-weight:700;letter-spacing:-1px;
+}
+.nav-brand{
+  font-family:var(--font-display);font-size:19px;
+  font-weight:700;color:var(--navy);letter-spacing:-.3px;
+}
+
+.nav-links{display:flex;align-items:center;gap:2px;}
+.nav-links li a{
+  display:flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:var(--radius-sm);
+  font-size:14px;font-weight:500;color:var(--text-muted);
+  transition:background .15s,color .15s;
+}
+.nav-links li a i{font-size:16px;}
+.nav-links li a:hover{background:var(--off-white);color:var(--navy);}
+.nav-links li a.active{color:var(--navy);background:var(--gold-pale);}
+
+.nav-cta{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 20px;border-radius:var(--radius-xl);
+  background:var(--navy);color:var(--white);
+  font-size:14px;font-weight:600;
+  transition:background .15s,transform .15s;
+  box-shadow:0 2px 8px rgba(10,61,98,.25);
+}
+.nav-cta:hover{background:var(--navy-mid);transform:translateY(-1px);}
+.nav-cta i{font-size:16px;}
+
+.nav-hamburger{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;cursor:pointer;padding:4px;
+}
+.nav-hamburger span{
+  display:block;width:22px;height:2px;
+  background:var(--navy);border-radius:2px;
+  transition:transform .3s,opacity .3s;
+}
+.nav-mobile-menu{
+  display:none;position:fixed;top:68px;left:0;right:0;bottom:0;
+  background:var(--white);z-index:190;
+  padding:24px 32px;flex-direction:column;gap:4px;
+  border-top:1px solid var(--border);overflow-y:auto;
+}
+.nav-mobile-menu a{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 16px;border-radius:var(--radius-md);
+  font-size:15px;font-weight:500;color:var(--text);
+  transition:background .15s;
+}
+.nav-mobile-menu a i{font-size:18px;color:var(--navy);}
+.nav-mobile-menu a:hover{background:var(--off-white);}
+.nav-mobile-menu .mobile-cta{
+  margin-top:16px;background:var(--navy);color:var(--white);
+  border-radius:var(--radius-xl);justify-content:center;
+}
+
+/* PAGE HERO */
+.page-hero{background:var(--navy);padding:60px 56px 52px;text-align:center;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(241,196,15,.1) 0%,transparent 70%);pointer-events:none;}
+.page-hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(241,196,15,.07) 0%,transparent 70%);pointer-events:none;}
+.hero-bg-dots{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);background-size:28px 28px;}
+.page-hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(241,196,15,.12);border:1px solid rgba(241,196,15,.3);border-radius:30px;padding:6px 18px;margin-bottom:20px;position:relative;z-index:1;}
+.page-hero-badge span{color:var(--gold);font-size:13px;font-weight:600;font-family:var(--font-display);}
+.page-hero-badge i{color:var(--gold);font-size:14px;}
+.page-hero h1{font-family:var(--font-display);font-size:38px;font-weight:700;color:var(--white);line-height:1.15;margin-bottom:12px;letter-spacing:-.4px;position:relative;z-index:1;}
+.page-hero h1 em{color:var(--gold);font-style:normal;}
+.page-hero p{color:rgba(255,255,255,.65);font-size:16px;line-height:1.7;max-width:480px;margin:0 auto;position:relative;z-index:1;}
+
+/* CONTACT SECTION */
+.contact-section{padding:60px 24px 80px;}
+.contact-layout{max-width:880px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+
+/* Contact channels */
+.channels-col{display:grid;gap:16px;}
+.section-tag{display:inline-block;background:var(--gold-pale);color:var(--navy);font-size:12px;font-weight:700;padding:5px 14px;border-radius:30px;margin-bottom:18px;letter-spacing:.06em;text-transform:uppercase;border:1px solid rgba(241,196,15,.4);}
+.channels-heading{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.2;}
+.channels-sub{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:20px;}
+
+.channel-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s,border-color .2s;cursor:pointer;text-decoration:none;color:inherit;}
+.channel-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:rgba(10,61,98,.15);}
+.cc-icon{width:44px;height:44px;border-radius:12px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cc-icon i{font-size:22px;color:var(--gold);}
+.cc-icon.whatsapp{background:#25D366;}
+.cc-icon.whatsapp i{color:var(--white);}
+.cc-text{flex:1;}
+.cc-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:2px;}
+.cc-value{font-size:14px;font-weight:700;color:var(--text);}
+.cc-sub{font-size:12px;color:var(--text-muted);margin-top:1px;}
+.cc-arrow{color:var(--text-muted);font-size:18px;flex-shrink:0;}
+.channel-card:hover .cc-arrow{color:var(--navy);}
+
+/* Response time badge */
+.response-badge{display:inline-flex;align-items:center;gap:6px;background:var(--gold-pale);border:1px solid rgba(241,196,15,.4);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--navy);margin-top:8px;}
+.response-badge i{font-size:13px;color:var(--gold-dark);}
+
+/* Form card */
+.form-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md);}
+.form-card-header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);padding:24px 28px;display:flex;align-items:center;gap:14px;}
+.fch-icon{width:44px;height:44px;border-radius:11px;background:rgba(241,196,15,.15);border:1px solid rgba(241,196,15,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.fch-icon i{color:var(--gold);font-size:22px;}
+.fch-text h2{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--white);margin-bottom:1px;}
+.fch-text p{color:rgba(255,255,255,.55);font-size:12px;}
+.form-body{padding:28px;}
+
+.field-group{margin-bottom:18px;}
+.field-label{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px;}
+.field-label i{font-size:13px;color:var(--text-muted);}
+.required{color:#e74c3c;margin-left:2px;}
+.field-input-wrap{position:relative;}
+.field-input-wrap i.input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--text-muted);pointer-events:none;}
+.field-input-wrap.has-icon input,.field-input-wrap.has-icon select{padding-left:42px;}
+input[type="text"],input[type="email"],textarea{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:var(--radius-md);font-family:var(--font-body);font-size:14px;color:var(--text);background:var(--off-white);outline:none;transition:border-color .2s,box-shadow .2s,background .2s;-webkit-appearance:none;}
+input:focus,textarea:focus{border-color:var(--navy);background:var(--white);box-shadow:0 0 0 3px rgba(10,61,98,.08);}
+input.error,textarea.error{border-color:#e74c3c;box-shadow:0 0 0 3px rgba(231,76,60,.08);}
+input::placeholder,textarea::placeholder{color:#aab4be;}
+textarea{resize:vertical;min-height:110px;line-height:1.6;}
+
+.field-error{font-size:12px;color:#e74c3c;margin-top:5px;display:none;align-items:center;gap:4px;}
+.field-error.visible{display:flex;}
+.field-error i{font-size:13px;}
+
+.char-count{font-size:11px;color:var(--text-muted);text-align:right;margin-top:4px;}
+
+.btn-send{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:15px 24px;border:none;border-radius:var(--radius-xl);background:#25D366;color:var(--white);font-family:var(--font-display);font-size:15px;font-weight:700;cursor:pointer;transition:background .15s,transform .15s,box-shadow .15s;box-shadow:0 4px 14px rgba(37,211,102,.3);margin-top:4px;}
+.btn-send:hover{background:#1ebe5d;transform:translateY(-2px);box-shadow:0 6px 18px rgba(37,211,102,.38);}
+.btn-send:active{transform:translateY(0);}
+.btn-send i{font-size:20px;}
+.btn-send .spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:var(--white);border-radius:50%;animation:spin .7s linear infinite;}
+
+.send-note{font-size:11px;color:var(--text-muted);text-align:center;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:4px;}
+.send-note i{font-size:13px;color:#25D366;}
+
+.scroll-reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+.scroll-reveal.visible{opacity:1;transform:translateY(0);}
+
+footer{background:var(--navy-dark);border-top:1px solid rgba(255,255,255,.08);padding:40px 56px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.footer-brand{display:flex;align-items:center;gap:10px;}
+.footer-logo-icon{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;}
+.footer-logo-icon span{color:var(--gold);font-family:var(--font-display);font-size:18px;font-weight:700;}
+.footer-brand-name{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--white);}
+.footer-tagline{font-size:13px;color:rgba(255,255,255,.4);}
+footer p.copy{font-size:12px;color:rgba(255,255,255,.35);}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-links a{font-size:13px;color:rgba(255,255,255,.5);transition:color .15s;}
+.footer-links a:hover{color:var(--white);}
+
+@media(max-width:900px){nav{padding:0 24px;}.nav-links,.nav-cta{display:none;}.nav-hamburger{display:flex;}.page-hero{padding:48px 24px 40px;}.page-hero h1{font-size:28px;}.contact-layout{grid-template-columns:1fr;}footer{padding:32px 24px;flex-direction:column;text-align:center;}.footer-links{justify-content:center;}}
+@media(max-width:500px){.form-body{padding:20px 18px;}.form-card-header{padding:20px 18px;}}
+</style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─────────────────────────────────────────── -->
+<nav id="mainNav">
+  <div class="nav-logo">
+   <div class="nav-logo-icon">
+  <img src="images/tawali.png" alt="Tawali" style="height:28px;width:auto;">
+</div>
+    <span class="nav-brand">Tawali</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="index.html"><i class="ti ti-home"></i>Home</a></li>
+    <li><a href="request.html"><i class="ti ti-shopping-cart"></i>Request item</a></li>
+    <li><a href="track.html"><i class="ti ti-map-pin"></i>Track order</a></li>
+    <li><a href="contact.html" class="active"><i class="ti ti-mail"></i>Contact</a></li>
+  </ul>
+
+  <a href="request.html" class="nav-cta">
+    <i class="ti ti-plus"></i>New request
+  </a>
+
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="index.html"><i class="ti ti-home"></i>Home</a>
+  <a href="request.html"><i class="ti ti-shopping-cart"></i>Request item</a>
+  <a href="track.html"><i class="ti ti-map-pin"></i>Track order</a>
+  <a href="contact.html"><i class="ti ti-mail"></i>Contact</a>
+  <a href="request.html" class="mobile-cta"><i class="ti ti-plus"></i>New request</a>
+</div>
+
+<section class="page-hero">
+  <div class="hero-bg-dots"></div>
+  <div class="page-hero-badge anim-1"><i class="ti ti-headset"></i><span>Support</span></div>
+  <h1 class="anim-2">Get in <em>touch</em></h1>
+  <p class="anim-3">We're here to help with any questions about your order, pricing, or how Tawali works.</p>
+</section>
+
+<section class="contact-section">
+  <div class="contact-layout">
+
+    <!-- Left: channels -->
+    <div class="channels-col scroll-reveal">
+      <div>
+        <span class="section-tag">Reach us directly</span>
+        <h2 class="channels-heading">We usually reply within the hour</h2>
+        <p class="channels-sub">WhatsApp is the fastest way to reach us. You can also send an email or use the message form.</p>
+      </div>
+
+      <a class="channel-card" href="https://wa.me/254108223342" target="_blank" rel="noopener">
+        <div class="cc-icon whatsapp"><i class="ti ti-brand-whatsapp"></i></div>
+        <div class="cc-text">
+          <div class="cc-label">WhatsApp</div>
+          <div class="cc-value">+211 920 000 000</div>
+          <div class="cc-sub">Tap to open chat directly</div>
+        </div>
+        <i class="ti ti-arrow-up-right cc-arrow"></i>
+      </a>
+
+      <a class="channel-card" href="mailto:info@tawali.com">
+        <div class="cc-icon"><i class="ti ti-mail"></i></div>
+        <div class="cc-text">
+          <div class="cc-label">Email</div>
+          <div class="cc-value">info@tawali.com</div>
+          <div class="cc-sub">We respond within 24 hours</div>
+        </div>
+        <i class="ti ti-arrow-up-right cc-arrow"></i>
+      </a>
+
+      <div class="channel-card" style="cursor:default;">
+        <div class="cc-icon"><i class="ti ti-map-pin"></i></div>
+        <div class="cc-text">
+          <div class="cc-label">Base</div>
+          <div class="cc-value">Nairobi, Kenya</div>
+          <div class="cc-sub">Sourcing & logistics hub</div>
+        </div>
+      </div>
+
+      <div class="channel-card" style="cursor:default;">
+        <div class="cc-icon"><i class="ti ti-clock"></i></div>
+        <div class="cc-text">
+          <div class="cc-label">Support hours</div>
+          <div class="cc-value">Mon – Sat, 8 AM – 8 PM EAT</div>
+          <div class="cc-sub">We're off on Sundays</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="response-badge"><i class="ti ti-bolt"></i>Average response: under 60 minutes</div>
+      </div>
+    </div>
+
+    <!-- Right: form -->
+    <div class="form-card scroll-reveal">
+      <div class="form-card-header">
+        <div class="fch-icon"><i class="ti ti-message-circle"></i></div>
+        <div class="fch-text">
+          <h2>Send a message</h2>
+          <p>We'll reply on WhatsApp instantly</p>
+        </div>
+      </div>
+      <div class="form-body">
+
+        <div class="field-group">
+          <div class="field-label"><i class="ti ti-user"></i>Your name <span class="required">*</span></div>
+          <div class="field-input-wrap has-icon">
+            <i class="ti ti-user input-icon"></i>
+            <input type="text" id="name" placeholder="e.g. Amara Deng" required autocomplete="name">
+          </div>
+          <div class="field-error" id="nameErr"><i class="ti ti-alert-circle"></i>Please enter your name</div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-label"><i class="ti ti-mail"></i>Email address <span style="font-weight:400;text-transform:none;font-size:11px;color:var(--text-muted)">(optional)</span></div>
+          <div class="field-input-wrap has-icon">
+            <i class="ti ti-mail input-icon"></i>
+            <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-label"><i class="ti ti-notes"></i>Your message <span class="required">*</span></div>
+          <textarea id="msg" placeholder="Ask us anything — about an order, pricing, delivery times, or how to get started…" maxlength="500" required></textarea>
+          <div class="char-count"><span id="charCount">0</span>/500</div>
+          <div class="field-error" id="msgErr"><i class="ti ti-alert-circle"></i>Please write a message</div>
+        </div>
+
+        <button class="btn-send" id="sendBtn">
+          <i class="ti ti-brand-whatsapp"></i>
+          <span>Send via WhatsApp</span>
+        </button>
+        <p class="send-note"><i class="ti ti-lock"></i>Opens WhatsApp with your message pre-filled</p>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">
+    <div class="footer-logo-icon"><span>T</span></div>
+    <div><div class="footer-brand-name">Tawali</div><div class="footer-tagline">From Nairobi to Juba, made easy.</div></div>
+  </div>
+  <p class="copy">© 2026 Tawali. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="request.html">Request item</a>
+    <a href="track.html">Track order</a><a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 10);
+});
+
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+hamburger.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  mobileMenu.style.display = menuOpen ? 'flex' : 'none';
+  const spans = hamburger.querySelectorAll('span');
+  if(menuOpen){
+    spans[0].style.transform='translateY(7px) rotate(45deg)';
+    spans[1].style.opacity='0';
+    spans[2].style.transform='translateY(-7px) rotate(-45deg)';
+  } else {
+    spans.forEach(s=>{s.style.transform='';s.style.opacity='';});
+  }
+});
+
+const reveals = document.querySelectorAll('.scroll-reveal');
+const obs = new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible');}),{threshold:0.1});
+reveals.forEach(el=>obs.observe(el));
+
+const msgEl = document.getElementById('msg');
+const charCount = document.getElementById('charCount');
+msgEl.addEventListener('input', () => charCount.textContent = msgEl.value.length);
+
+function showErr(id, show){
+  document.getElementById(id+'Err').classList.toggle('visible', show);
+  document.getElementById(id).classList.toggle('error', show);
+}
+
+document.getElementById('name').addEventListener('blur', () => showErr('name', !document.getElementById('name').value.trim()));
+document.getElementById('msg').addEventListener('blur', () => showErr('msg', !document.getElementById('msg').value.trim()));
+
+document.getElementById('sendBtn').addEventListener('click', function(){
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const msg = msgEl.value.trim();
+  let ok = true;
+
+  showErr('name', !name); if(!name) ok = false;
+  showErr('msg', !msg); if(!msg) ok = false;
+  if(!ok) return;
+
+  const btn = this;
+  btn.innerHTML = '<div class="spinner"></div><span>Opening WhatsApp…</span>';
+  btn.disabled = true;
+
+  const text = `Hello Tawali Support! 👋\n\nI have an inquiry:\n👤 *Name:* ${name}\n📧 *Email:* ${email || 'Not provided'}\n\n📝 *Message:* ${msg}`;
+
+  setTimeout(() => {
+    window.open(`https://wa.me/254108223342?text=${encodeURIComponent(text)}`, '_blank');
+    btn.innerHTML = '<i class="ti ti-brand-whatsapp"></i><span>Send via WhatsApp</span>';
+    btn.disabled = false;
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    msgEl.value = '';
+    charCount.textContent = '0';
+  }, 700);
+});
+</script>
+</body>
+</html>

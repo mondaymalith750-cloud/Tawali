@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tawali | Request Item</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+<style>
+/* ─── RESET & BASE ─────────────────────────────────── */
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#0A3D62;
+  --navy-dark:#072d48;
+  --navy-mid:#0d4f7c;
+  --gold:#F1C40F;
+  --gold-dark:#C9A80C;
+  --gold-pale:#fef9e2;
+  --white:#ffffff;
+  --off-white:#f7f8fa;
+  --text:#1a2b3c;
+  --text-muted:#5a7286;
+  --border:#e2e8f0;
+  --radius-sm:8px;
+  --radius-md:12px;
+  --radius-lg:20px;
+  --radius-xl:28px;
+  --font-display:'Sora',sans-serif;
+  --font-body:'Plus Jakarta Sans',sans-serif;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.05);
+  --shadow-md:0 4px 16px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.05);
+  --shadow-lg:0 10px 40px rgba(0,0,0,.1),0 4px 12px rgba(0,0,0,.06);
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font-body);
+  background:var(--off-white);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+
+/* ─── ANIMATIONS ───────────────────────────────────── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+@keyframes pulse-ring{
+  0%{box-shadow:0 0 0 0 rgba(241,196,15,.4);}
+  70%{box-shadow:0 0 0 14px rgba(241,196,15,0);}
+  100%{box-shadow:0 0 0 0 rgba(241,196,15,0);}
+}
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+
+.anim-1{animation:fadeUp .6s ease both;}
+.anim-2{animation:fadeUp .6s .1s ease both;}
+.anim-3{animation:fadeUp .6s .2s ease both;}
+
+/* ─── NAVBAR ────────────────────────────────────────── */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 56px;height:68px;
+  transition:box-shadow .3s;
+}
+nav.scrolled{box-shadow:var(--shadow-md);}
+
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.nav-logo-fallback{
+  color:var(--gold);font-family:var(--font-display);
+  font-size:22px;font-weight:700;letter-spacing:-1px;
+}
+.nav-brand{
+  font-family:var(--font-display);font-size:19px;
+  font-weight:700;color:var(--navy);letter-spacing:-.3px;
+}
+
+.nav-links{display:flex;align-items:center;gap:2px;}
+.nav-links li a{
+  display:flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:var(--radius-sm);
+  font-size:14px;font-weight:500;color:var(--text-muted);
+  transition:background .15s,color .15s;
+}
+.nav-links li a i{font-size:16px;}
+.nav-links li a:hover{background:var(--off-white);color:var(--navy);}
+.nav-links li a.active{color:var(--navy);background:var(--gold-pale);}
+
+.nav-cta{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 20px;border-radius:var(--radius-xl);
+  background:var(--navy);color:var(--white);
+  font-size:14px;font-weight:600;
+  transition:background .15s,transform .15s;
+  box-shadow:0 2px 8px rgba(10,61,98,.25);
+}
+.nav-cta:hover{background:var(--navy-mid);transform:translateY(-1px);}
+.nav-cta i{font-size:16px;}
+
+.nav-hamburger{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;cursor:pointer;padding:4px;
+}
+.nav-hamburger span{
+  display:block;width:22px;height:2px;
+  background:var(--navy);border-radius:2px;
+  transition:transform .3s,opacity .3s;
+}
+.nav-mobile-menu{
+  display:none;position:fixed;top:68px;left:0;right:0;bottom:0;
+  background:var(--white);z-index:190;
+  padding:24px 32px;flex-direction:column;gap:4px;
+  border-top:1px solid var(--border);overflow-y:auto;
+}
+.nav-mobile-menu a{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 16px;border-radius:var(--radius-md);
+  font-size:15px;font-weight:500;color:var(--text);
+  transition:background .15s;
+}
+.nav-mobile-menu a i{font-size:18px;color:var(--navy);}
+.nav-mobile-menu a:hover{background:var(--off-white);}
+.nav-mobile-menu .mobile-cta{
+  margin-top:16px;background:var(--navy);color:var(--white);
+  border-radius:var(--radius-xl);justify-content:center;
+}
+
+/* ─── PAGE HERO ─────────────────────────────────────── */
+.page-hero{
+  background:var(--navy);
+  padding:60px 56px 52px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;
+  top:-100px;right:-100px;
+  width:380px;height:380px;border-radius:50%;
+  background:radial-gradient(circle,rgba(241,196,15,.1) 0%,transparent 70%);
+  pointer-events:none;
+}
+.page-hero::after{
+  content:'';position:absolute;
+  bottom:-60px;left:-60px;
+  width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(241,196,15,.07) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-bg-dots{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+
+.page-hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(241,196,15,.12);
+  border:1px solid rgba(241,196,15,.3);
+  border-radius:30px;padding:6px 18px;
+  margin-bottom:20px;position:relative;z-index:1;
+}
+.page-hero-badge span{
+  color:var(--gold);font-size:13px;font-weight:600;
+  font-family:var(--font-display);
+}
+.page-hero-badge i{color:var(--gold);font-size:14px;}
+
+.page-hero h1{
+  font-family:var(--font-display);
+  font-size:38px;font-weight:700;color:var(--white);
+  line-height:1.15;margin-bottom:12px;letter-spacing:-.4px;
+  position:relative;z-index:1;
+}
+.page-hero h1 em{color:var(--gold);font-style:normal;}
+.page-hero p{
+  color:rgba(255,255,255,.65);font-size:16px;line-height:1.7;
+  max-width:480px;margin:0 auto;position:relative;z-index:1;
+}
+
+/* ─── FORM SECTION ──────────────────────────────────── */
+.form-section{
+  padding:60px 24px 80px;
+}
+
+.form-layout{
+  max-width:680px;margin:0 auto;
+  display:grid;gap:24px;
+}
+
+/* Progress bar */
+.progress-bar{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:22px 28px;
+  box-shadow:var(--shadow-sm);
+  display:flex;align-items:center;gap:0;
+}
+.progress-step{
+  display:flex;flex-direction:column;align-items:center;
+  flex:1;position:relative;
+}
+.progress-step:not(:last-child)::after{
+  content:'';position:absolute;
+  top:16px;left:50%;width:100%;height:2px;
+  background:var(--border);z-index:0;
+}
+.progress-step.done:not(:last-child)::after,
+.progress-step.active:not(:last-child)::after{
+  background:var(--navy);
+}
+.ps-circle{
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:13px;font-weight:700;
+  position:relative;z-index:1;
+  border:2px solid var(--border);
+  background:var(--white);color:var(--text-muted);
+  transition:all .3s;
+}
+.progress-step.done .ps-circle{
+  background:var(--navy);border-color:var(--navy);color:var(--white);
+}
+.progress-step.active .ps-circle{
+  background:var(--gold);border-color:var(--gold-dark);color:var(--navy);
+  box-shadow:0 0 0 4px rgba(241,196,15,.25);
+}
+.ps-label{
+  font-size:11px;font-weight:600;color:var(--text-muted);
+  margin-top:8px;text-transform:uppercase;letter-spacing:.04em;
+}
+.progress-step.active .ps-label{color:var(--navy);}
+.progress-step.done .ps-label{color:var(--navy);}
+
+/* Form card */
+.form-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  overflow:hidden;
+  box-shadow:var(--shadow-md);
+}
+
+.form-card-header{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);
+  padding:28px 32px;
+  display:flex;align-items:center;gap:16px;
+}
+.fch-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:rgba(241,196,15,.15);
+  border:1px solid rgba(241,196,15,.25);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.fch-icon i{color:var(--gold);font-size:24px;}
+.fch-text h2{
+  font-family:var(--font-display);
+  font-size:20px;font-weight:700;color:var(--white);
+  margin-bottom:2px;
+}
+.fch-text p{color:rgba(255,255,255,.55);font-size:13px;}
+
+.form-body{padding:32px;}
+
+/* Field groups */
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.field-group{margin-bottom:20px;}
+
+.field-label{
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;font-weight:700;color:var(--text);
+  text-transform:uppercase;letter-spacing:.06em;
+  margin-bottom:8px;
+}
+.field-label i{font-size:14px;color:var(--text-muted);}
+.field-label .required{color:#e74c3c;margin-left:2px;}
+
+.field-input-wrap{position:relative;}
+.field-input-wrap i.input-icon{
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);
+  font-size:17px;color:var(--text-muted);pointer-events:none;
+}
+.field-input-wrap.has-icon input,
+.field-input-wrap.has-icon select{
+  padding-left:42px;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+select,
+textarea{
+  width:100%;
+  padding:12px 16px;
+  border:1.5px solid var(--border);
+  border-radius:var(--radius-md);
+  font-family:var(--font-body);
+  font-size:14px;color:var(--text);
+  background:var(--off-white);
+  transition:border-color .2s,box-shadow .2s,background .2s;
+  outline:none;
+  -webkit-appearance:none;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--navy);
+  background:var(--white);
+  box-shadow:0 0 0 3px rgba(10,61,98,.08);
+}
+input.error,textarea.error,select.error{
+  border-color:#e74c3c;
+  box-shadow:0 0 0 3px rgba(231,76,60,.08);
+}
+textarea{resize:vertical;min-height:100px;line-height:1.6;}
+select{cursor:pointer;}
+input::placeholder,textarea::placeholder{color:#aab4be;}
+
+/* Character counter */
+.char-count{
+  font-size:11px;color:var(--text-muted);
+  text-align:right;margin-top:4px;
+}
+
+/* File upload zone */
+.upload-zone{
+  border:2px dashed var(--border);
+  border-radius:var(--radius-md);
+  padding:28px 20px;
+  text-align:center;
+  cursor:pointer;
+  transition:border-color .2s,background .2s;
+  background:var(--off-white);
+  position:relative;
+}
+.upload-zone:hover,.upload-zone.dragover{
+  border-color:var(--navy);
+  background:rgba(10,61,98,.03);
+}
+.upload-zone input[type="file"]{
+  position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
+}
+.uz-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--gold-pale);border:1px solid rgba(241,196,15,.4);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 12px;
+}
+.uz-icon i{font-size:22px;color:var(--navy);}
+.uz-title{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:4px;}
+.uz-sub{font-size:12px;color:var(--text-muted);}
+.uz-formats{
+  display:inline-flex;gap:6px;margin-top:10px;flex-wrap:wrap;justify-content:center;
+}
+.uz-format-tag{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:20px;padding:2px 10px;
+  font-size:11px;font-weight:600;color:var(--text-muted);
+}
+
+/* File preview */
+#filePreview{
+  margin-top:12px;display:none;
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:12px 14px;
+  display:none;align-items:center;gap:12px;
+}
+#filePreview.visible{display:flex;}
+.fp-thumb{
+  width:44px;height:44px;border-radius:8px;
+  object-fit:cover;border:1px solid var(--border);
+  flex-shrink:0;
+}
+.fp-thumb-icon{
+  width:44px;height:44px;border-radius:8px;
+  background:var(--off-white);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.fp-thumb-icon i{font-size:22px;color:var(--navy);}
+.fp-info{flex:1;min-width:0;}
+.fp-name{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.fp-size{font-size:11px;color:var(--text-muted);}
+.fp-remove{
+  background:none;border:none;cursor:pointer;
+  color:var(--text-muted);font-size:18px;
+  display:flex;align-items:center;
+  transition:color .15s;padding:4px;border-radius:6px;
+}
+.fp-remove:hover{color:#e74c3c;background:rgba(231,76,60,.08);}
+
+/* Divider */
+.form-divider{
+  display:flex;align-items:center;gap:12px;
+  margin:4px 0 20px;
+}
+.form-divider span{
+  font-size:11px;font-weight:700;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;
+}
+.form-divider::before,.form-divider::after{
+  content:'';flex:1;height:1px;background:var(--border);
+}
+
+/* Info banner */
+.info-banner{
+  display:flex;gap:12px;align-items:flex-start;
+  background:var(--gold-pale);border:1px solid rgba(241,196,15,.4);
+  border-radius:var(--radius-md);padding:14px 16px;
+  margin-bottom:24px;
+}
+.info-banner i{color:var(--navy);font-size:18px;flex-shrink:0;margin-top:1px;}
+.info-banner p{font-size:13px;color:var(--text);line-height:1.6;}
+.info-banner strong{color:var(--navy);}
+
+/* Submit button */
+.btn-submit{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:16px 24px;
+  border:none;border-radius:var(--radius-xl);
+  background:var(--navy);color:var(--white);
+  font-family:var(--font-display);font-size:16px;font-weight:700;
+  cursor:pointer;
+  transition:background .15s,transform .15s,box-shadow .15s;
+  box-shadow:0 4px 16px rgba(10,61,98,.25);
+  margin-top:8px;
+}
+.btn-submit:hover{background:var(--navy-mid);transform:translateY(-2px);box-shadow:0 6px 20px rgba(10,61,98,.3);}
+.btn-submit:active{transform:translateY(0);}
+.btn-submit i{font-size:20px;}
+.btn-submit.loading{pointer-events:none;opacity:.8;}
+.btn-submit .spinner{
+  width:18px;height:18px;border:2px solid rgba(255,255,255,.3);
+  border-top-color:var(--white);border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+
+/* Error message */
+.field-error{
+  font-size:12px;color:#e74c3c;margin-top:5px;
+  display:flex;align-items:center;gap:4px;display:none;
+}
+.field-error.visible{display:flex;}
+.field-error i{font-size:13px;}
+
+/* ─── TRUST SIDEBAR / CARD ──────────────────────────── */
+.trust-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius-lg);padding:24px;
+  box-shadow:var(--shadow-sm);
+}
+.trust-card h3{
+  font-family:var(--font-display);font-size:16px;font-weight:700;
+  color:var(--navy);margin-bottom:16px;
+  display:flex;align-items:center;gap:8px;
+}
+.trust-card h3 i{color:var(--gold);font-size:18px;}
+.trust-item{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:12px 0;border-bottom:1px solid var(--border);
+}
+.trust-item:last-child{border-bottom:none;padding-bottom:0;}
+.ti-icon{
+  width:34px;height:34px;border-radius:8px;
+  background:var(--off-white);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.ti-icon i{font-size:16px;color:var(--navy);}
+.ti-text p:first-child{font-size:13px;font-weight:600;color:var(--text);}
+.ti-text p:last-child{font-size:12px;color:var(--text-muted);margin-top:1px;}
+
+/* ─── SUCCESS MODAL ─────────────────────────────────── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(7,45,72,.6);
+  backdrop-filter:blur(4px);
+  display:none;align-items:center;justify-content:center;
+  padding:24px;
+}
+.modal-overlay.visible{display:flex;}
+.modal{
+  background:var(--white);border-radius:var(--radius-xl);
+  padding:40px 36px;max-width:440px;width:100%;
+  text-align:center;box-shadow:var(--shadow-lg);
+  animation:fadeUp .4s ease both;
+}
+.modal-icon{
+  width:72px;height:72px;border-radius:50%;
+  background:rgba(39,174,96,.12);border:2px solid rgba(39,174,96,.3);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+}
+.modal-icon i{font-size:36px;color:#27ae60;}
+.modal h2{
+  font-family:var(--font-display);font-size:22px;font-weight:700;
+  color:var(--navy);margin-bottom:8px;
+}
+.modal p{font-size:14px;color:var(--text-muted);line-height:1.7;margin-bottom:20px;}
+.modal-order-id{
+  background:var(--navy);color:var(--gold);
+  font-family:var(--font-display);font-size:20px;font-weight:700;
+  border-radius:var(--radius-md);padding:14px 24px;
+  margin:0 auto 24px;letter-spacing:.04em;
+  display:inline-block;
+}
+.modal-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.btn-modal-primary{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:11px 22px;border-radius:var(--radius-xl);
+  background:var(--navy);color:var(--white);
+  font-size:14px;font-weight:600;border:none;cursor:pointer;
+  transition:background .15s;
+}
+.btn-modal-primary:hover{background:var(--navy-mid);}
+.btn-modal-secondary{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:11px 22px;border-radius:var(--radius-xl);
+  border:1.5px solid var(--border);color:var(--text-muted);
+  font-size:14px;font-weight:600;cursor:pointer;
+  background:none;transition:border-color .15s,color .15s;
+}
+.btn-modal-secondary:hover{border-color:var(--navy);color:var(--navy);}
+
+/* ─── SCROLL REVEAL ─────────────────────────────────── */
+.scroll-reveal{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .6s ease,transform .6s ease;
+}
+.scroll-reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ─── FOOTER ────────────────────────────────────────── */
+footer{
+  background:var(--navy-dark);
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:40px 56px;
+  display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:20px;
+}
+.footer-brand{display:flex;align-items:center;gap:10px;}
+.footer-logo-icon{
+  width:34px;height:34px;border-radius:8px;
+  background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+}
+.footer-logo-icon span{
+  color:var(--gold);font-family:var(--font-display);
+  font-size:18px;font-weight:700;
+}
+.footer-brand-name{
+  font-family:var(--font-display);font-size:17px;
+  font-weight:700;color:var(--white);
+}
+.footer-tagline{font-size:13px;color:rgba(255,255,255,.4);}
+footer p.copy{font-size:12px;color:rgba(255,255,255,.35);}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-links a{
+  font-size:13px;color:rgba(255,255,255,.5);
+  transition:color .15s;
+}
+.footer-links a:hover{color:var(--white);}
+
+/* ─── RESPONSIVE ────────────────────────────────────── */
+@media(max-width:900px){
+  nav{padding:0 24px;}
+  .nav-links,.nav-cta{display:none;}
+  .nav-hamburger{display:flex;}
+  .page-hero{padding:48px 24px 40px;}
+  .page-hero h1{font-size:28px;}
+  footer{padding:32px 24px;flex-direction:column;text-align:center;}
+  .footer-links{justify-content:center;}
+}
+@media(max-width:640px){
+  .field-row{grid-template-columns:1fr;}
+  .form-body{padding:24px 20px;}
+  .form-card-header{padding:22px 20px;}
+  .progress-bar{padding:16px 12px;}
+  .ps-label{font-size:9px;}
+  .modal{padding:28px 20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─────────────────────────────────────────── -->
+<nav id="mainNav">
+  <div class="nav-logo">
+ <div class="nav-logo-icon">
+  <img src="images/tawali.png" alt="Tawali" style="height:28px;width:auto;">
+</div>
+    <span class="nav-brand">Tawali</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="index.html"><i class="ti ti-home"></i>Home</a></li>
+    <li><a href="request.html" class="active"><i class="ti ti-shopping-cart"></i>Request item</a></li>
+    <li><a href="track.html"><i class="ti ti-map-pin"></i>Track order</a></li>
+    <li><a href="contact.html"><i class="ti ti-mail"></i>Contact</a></li>
+  </ul>
+
+  <a href="request.html" class="nav-cta">
+    <i class="ti ti-plus"></i>New request
+  </a>
+
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="index.html"><i class="ti ti-home"></i>Home</a>
+  <a href="request.html"><i class="ti ti-shopping-cart"></i>Request item</a>
+  <a href="track.html"><i class="ti ti-map-pin"></i>Track order</a>
+  <a href="contact.html"><i class="ti ti-mail"></i>Contact</a>
+  <a href="request.html" class="mobile-cta"><i class="ti ti-plus"></i>New request</a>
+</div>
+
+<!-- ─── PAGE HERO ──────────────────────────────────────── -->
+<section class="page-hero">
+  <div class="hero-bg-dots"></div>
+  <div class="page-hero-badge anim-1">
+    <i class="ti ti-shopping-bag"></i>
+    <span>Step 1 of 5 — Request</span>
+  </div>
+  <h1 class="anim-2">Request an <em>item</em> from Nairobi</h1>
+  <p class="anim-3">Fill in the details below and we'll send you a full quote within 24 hours. No commitment until you approve.</p>
+</section>
+
+<!-- ─── FORM SECTION ───────────────────────────────────── -->
+<section class="form-section">
+  <div class="form-layout">
+
+    <!-- Progress steps -->
+    <div class="progress-bar scroll-reveal">
+      <div class="progress-step active">
+        <div class="ps-circle">1</div>
+        <div class="ps-label">Request</div>
+      </div>
+      <div class="progress-step">
+        <div class="ps-circle">2</div>
+        <div class="ps-label">Quote</div>
+      </div>
+      <div class="progress-step">
+        <div class="ps-circle">3</div>
+        <div class="ps-label">Pay</div>
+      </div>
+      <div class="progress-step">
+        <div class="ps-circle">4</div>
+        <div class="ps-label">We buy</div>
+      </div>
+      <div class="progress-step">
+        <div class="ps-circle">5</div>
+        <div class="ps-label">Delivery</div>
+      </div>
+    </div>
+
+    <!-- Info banner -->
+    <div class="info-banner scroll-reveal">
+      <i class="ti ti-info-circle"></i>
+      <p><strong>How this works:</strong> Submit your request and we'll source the item in Nairobi, send you a transparent quote (item cost + service fee + shipping), and only purchase once you confirm.</p>
+    </div>
+
+    <!-- Main form card -->
+    <div class="form-card scroll-reveal">
+      <div class="form-card-header">
+        <div class="fch-icon"><i class="ti ti-forms"></i></div>
+        <div class="fch-text">
+          <h2>Item Request Form</h2>
+          <p>All fields marked <span style="color:rgba(241,196,15,.8)">*</span> are required</p>
+        </div>
+      </div>
+
+      <div class="form-body">
+        <form id="orderForm" novalidate>
+
+          <!-- Contact details -->
+          <div class="form-divider"><span>Your Contact Details</span></div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <div class="field-label">
+                <i class="ti ti-user"></i>Full name <span class="required">*</span>
+              </div>
+              <div class="field-input-wrap has-icon">
+                <i class="ti ti-user input-icon"></i>
+                <input type="text" id="name" placeholder="e.g. Amara Deng" required autocomplete="name">
+              </div>
+              <div class="field-error" id="nameErr"><i class="ti ti-alert-circle"></i>Please enter your name</div>
+            </div>
+
+            <div class="field-group">
+              <div class="field-label">
+                <i class="ti ti-phone"></i>Phone number <span class="required">*</span>
+              </div>
+              <div class="field-input-wrap has-icon">
+                <i class="ti ti-phone input-icon"></i>
+                <input type="tel" id="phone" placeholder="+211 9XX XXX XXX" required autocomplete="tel">
+              </div>
+              <div class="field-error" id="phoneErr"><i class="ti ti-alert-circle"></i>Please enter a phone number</div>
+            </div>
+          </div>
+
+          <!-- Item details -->
+          <div class="form-divider"><span>Item Details</span></div>
+
+          <div class="field-group">
+            <div class="field-label">
+              <i class="ti ti-package"></i>Product name <span class="required">*</span>
+            </div>
+            <div class="field-input-wrap has-icon">
+              <i class="ti ti-package input-icon"></i>
+              <input type="text" id="product" placeholder="e.g. Samsung Galaxy S24, Ankara fabric, baby crib…" required>
+            </div>
+            <div class="field-error" id="productErr"><i class="ti ti-alert-circle"></i>Please describe the product</div>
+          </div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <div class="field-label">
+                <i class="ti ti-hash"></i>Quantity <span class="required">*</span>
+              </div>
+              <div class="field-input-wrap has-icon">
+                <i class="ti ti-hash input-icon"></i>
+                <input type="number" id="qty" placeholder="1" min="1" required>
+              </div>
+              <div class="field-error" id="qtyErr"><i class="ti ti-alert-circle"></i>Quantity must be at least 1</div>
+            </div>
+
+            <div class="field-group">
+              <div class="field-label">
+                <i class="ti ti-tag"></i>Category
+              </div>
+              <div class="field-input-wrap has-icon">
+                <i class="ti ti-tag input-icon"></i>
+                <select id="category">
+                  <option value="">Select a category…</option>
+                  <option>Electronics</option>
+                  <option>Clothing & Fashion</option>
+                  <option>Baby & Kids</option>
+                  <option>Home & Furniture</option>
+                  <option>Beauty & Health</option>
+                  <option>Groceries & Food</option>
+                  <option>Automotive</option>
+                  <option>Books & Stationery</option>
+                  <option>Sports & Fitness</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">
+              <i class="ti ti-link"></i>Product link <span style="font-weight:400;text-transform:none;font-size:11px;color:var(--text-muted)">(optional but helpful)</span>
+            </div>
+            <div class="field-input-wrap has-icon">
+              <i class="ti ti-link input-icon"></i>
+              <input type="url" id="link" placeholder="https://jumia.co.ke/… or any store link">
+            </div>
+          </div>
+
+          <div class="field-group">
+            <div class="field-label">
+              <i class="ti ti-notes"></i>Extra details
+            </div>
+            <textarea id="details" placeholder="Size, colour, brand, model number, delivery address in Juba, or any other specifications…" maxlength="500"></textarea>
+            <div class="char-count"><span id="charCount">0</span>/500</div>
+          </div>
+
+          <!-- Media upload -->
+          <div class="form-divider"><span>Reference Image / Video</span></div>
+
+          <div class="field-group">
+            <div class="field-label">
+              <i class="ti ti-photo"></i>Upload reference <span style="font-weight:400;text-transform:none;font-size:11px;color:var(--text-muted)">(optional, max 2 MB)</span>
+            </div>
+            <div class="upload-zone" id="uploadZone">
+              <input type="file" id="mediaFile" accept="image/*,video/*">
+              <div class="uz-icon"><i class="ti ti-cloud-upload"></i></div>
+              <div class="uz-title">Drop a file here or click to browse</div>
+              <div class="uz-sub">A screenshot or video helps us find the exact item</div>
+              <div class="uz-formats">
+                <span class="uz-format-tag">JPG</span>
+                <span class="uz-format-tag">PNG</span>
+                <span class="uz-format-tag">WEBP</span>
+                <span class="uz-format-tag">MP4</span>
+                <span class="uz-format-tag">MOV</span>
+              </div>
+            </div>
+
+            <div id="filePreview">
+              <div class="fp-thumb-icon" id="fpThumbWrap">
+                <i class="ti ti-photo"></i>
+              </div>
+              <div class="fp-info">
+                <div class="fp-name" id="fpName">—</div>
+                <div class="fp-size" id="fpSize">—</div>
+              </div>
+              <button type="button" class="fp-remove" id="fpRemove" title="Remove file">
+                <i class="ti ti-x"></i>
+              </button>
+            </div>
+            <div class="field-error" id="mediaErr"><i class="ti ti-alert-circle"></i></div>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <i class="ti ti-send"></i>
+            <span>Submit my request</span>
+          </button>
+
+        </form>
+      </div>
+    </div>
+
+    <!-- Trust card -->
+    <div class="trust-card scroll-reveal">
+      <h3><i class="ti ti-shield-check"></i>Why your request is safe with us</h3>
+      <div class="trust-item">
+        <div class="ti-icon"><i class="ti ti-receipt"></i></div>
+        <div class="ti-text">
+          <p>No payment until you approve</p>
+          <p>We send a full quote first — you decide.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="ti-icon"><i class="ti ti-map-pin"></i></div>
+        <div class="ti-text">
+          <p>Real-time tracking</p>
+          <p>Follow your order from Nairobi to Juba.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="ti-icon"><i class="ti ti-clock"></i></div>
+        <div class="ti-text">
+          <p>Quote within 24 hours</p>
+          <p>We respond fast — usually within the day.</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="ti-icon"><i class="ti ti-headset"></i></div>
+        <div class="ti-text">
+          <p>Dedicated support</p>
+          <p>Reach us anytime via WhatsApp or phone.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SUCCESS MODAL ──────────────────────────────────── -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="modal-icon"><i class="ti ti-check"></i></div>
+    <h2>Request received!</h2>
+    <p>We'll review your request and send you a full quote within 24 hours. Save your order ID to track progress.</p>
+    <div class="modal-order-id" id="modalOrderId">TW-000000</div>
+    <div class="modal-actions">
+      <button class="btn-modal-primary" id="trackBtn">
+        <i class="ti ti-map-pin"></i>Track order
+      </button>
+      <button class="btn-modal-secondary" id="newRequestBtn">
+        <i class="ti ti-plus"></i>New request
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─────────────────────────────────────────── -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-logo-icon"><span>T</span></div>
+    <div>
+      <div class="footer-brand-name">Tawali</div>
+      <div class="footer-tagline">From Nairobi to Juba, made easy.</div>
+    </div>
+  </div>
+  <p class="copy">© 2026 Tawali. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="request.html">Request item</a>
+    <a href="track.html">Track order</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<!-- ─── SCRIPTS ────────────────────────────────────────── -->
+<script>
+/* Sticky nav */
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 10);
+});
+
+/* Hamburger */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+hamburger.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  mobileMenu.style.display = menuOpen ? 'flex' : 'none';
+  const spans = hamburger.querySelectorAll('span');
+  if(menuOpen){
+    spans[0].style.transform='translateY(7px) rotate(45deg)';
+    spans[1].style.opacity='0';
+    spans[2].style.transform='translateY(-7px) rotate(-45deg)';
+  } else {
+    spans.forEach(s=>{s.style.transform='';s.style.opacity='';});
+  }
+});
+
+/* Scroll reveal */
+const reveals = document.querySelectorAll('.scroll-reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.1});
+reveals.forEach(el => observer.observe(el));
+
+/* Character counter */
+const detailsEl = document.getElementById('details');
+const charCount = document.getElementById('charCount');
+detailsEl.addEventListener('input', () => {
+  charCount.textContent = detailsEl.value.length;
+});
+
+/* File upload */
+let encodedMedia = '';
+const mediaFile = document.getElementById('mediaFile');
+const uploadZone = document.getElementById('uploadZone');
+const filePreview = document.getElementById('filePreview');
+const fpName = document.getElementById('fpName');
+const fpSize = document.getElementById('fpSize');
+const fpThumbWrap = document.getElementById('fpThumbWrap');
+const fpRemove = document.getElementById('fpRemove');
+const mediaErr = document.getElementById('mediaErr');
+
+function formatBytes(bytes){
+  if(bytes < 1024) return bytes + ' B';
+  if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+  return (bytes/(1024*1024)).toFixed(1) + ' MB';
+}
+
+function handleFile(file){
+  if(!file) return;
+  mediaErr.classList.remove('visible');
+
+  if(file.size > 2 * 1024 * 1024){
+    mediaErr.querySelector('i').nextSibling
+      ? null : mediaErr.appendChild(document.createTextNode(''));
+    mediaErr.innerHTML = '<i class="ti ti-alert-circle"></i> File too large — please choose something under 2 MB';
+    mediaErr.classList.add('visible');
+    mediaFile.value = '';
+    encodedMedia = '';
+    filePreview.classList.remove('visible');
+    return;
+  }
+
+  fpName.textContent = file.name;
+  fpSize.textContent = formatBytes(file.size);
+  filePreview.classList.add('visible');
+
+  // Show image thumb or generic icon
+  fpThumbWrap.innerHTML = '';
+  if(file.type.startsWith('image/')){
+    const img = document.createElement('img');
+    img.className = 'fp-thumb';
+    fpThumbWrap.appendChild(img);
+    const reader = new FileReader();
+    reader.onload = e => {
+      img.src = e.target.result;
+      encodedMedia = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  } else {
+    fpThumbWrap.innerHTML = '<i class="ti ti-movie" style="font-size:22px;color:var(--navy)"></i>';
+    const reader = new FileReader();
+    reader.onload = e => { encodedMedia = e.target.result; };
+    reader.readAsDataURL(file);
+  }
+}
+
+mediaFile.addEventListener('change', () => handleFile(mediaFile.files[0]));
+
+/* Drag-and-drop */
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadZone.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if(file) handleFile(file);
+});
+
+fpRemove.addEventListener('click', () => {
+  encodedMedia = '';
+  mediaFile.value = '';
+  filePreview.classList.remove('visible');
+  fpName.textContent = '—';
+  fpSize.textContent = '—';
+});
+
+/* Validation helpers */
+function showErr(id, show){
+  document.getElementById(id).classList.toggle('visible', show);
+  const inputId = id.replace('Err','');
+  const input = document.getElementById(inputId);
+  if(input) input.classList.toggle('error', show);
+}
+
+function validate(){
+  let ok = true;
+  const name = document.getElementById('name').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const product = document.getElementById('product').value.trim();
+  const qty = parseInt(document.getElementById('qty').value);
+
+  showErr('nameErr', !name);    if(!name) ok=false;
+  showErr('phoneErr', !phone);  if(!phone) ok=false;
+  showErr('productErr', !product); if(!product) ok=false;
+  showErr('qtyErr', !qty || qty < 1); if(!qty || qty < 1) ok=false;
+  return ok;
+}
+
+/* Generate order ID */
+function generateOrderId(){
+  return 'TW-' + Math.random().toString(36).toUpperCase().slice(2,8);
+}
+
+/* Form submit */
+document.getElementById('orderForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  if(!validate()) return;
+
+  const btn = document.getElementById('submitBtn');
+  btn.classList.add('loading');
+  btn.innerHTML = '<div class="spinner"></div><span>Submitting…</span>';
+
+  setTimeout(() => {
+    const orderId = generateOrderId();
+    const order = {
+      id: orderId,
+      name: document.getElementById('name').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      product: document.getElementById('product').value.trim(),
+      category: document.getElementById('category').value,
+      qty: document.getElementById('qty').value,
+      link: document.getElementById('link').value.trim(),
+      details: document.getElementById('details').value.trim(),
+      media: encodedMedia,
+      status: 'Order Received',
+      submitted: new Date().toISOString()
+    };
+
+    try {
+      localStorage.setItem(orderId, JSON.stringify(order));
+    } catch(err) {
+      // If media was too large for localStorage, save without media
+      order.media = '';
+      localStorage.setItem(orderId, JSON.stringify(order));
+    }
+
+    btn.classList.remove('loading');
+    btn.innerHTML = '<i class="ti ti-send"></i><span>Submit my request</span>';
+
+    document.getElementById('modalOrderId').textContent = orderId;
+    document.getElementById('successModal').classList.add('visible');
+
+    encodedMedia = '';
+    this.reset();
+    charCount.textContent = '0';
+    filePreview.classList.remove('visible');
+
+    // Store last order ID for track redirect
+    sessionStorage.setItem('lastOrderId', orderId);
+
+  }, 1200);
+});
+
+/* Modal buttons */
+document.getElementById('trackBtn').addEventListener('click', () => {
+  window.location.href = 'track.html';
+});
+document.getElementById('newRequestBtn').addEventListener('click', () => {
+  document.getElementById('successModal').classList.remove('visible');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* Close modal on overlay click */
+document.getElementById('successModal').addEventListener('click', function(e){
+  if(e.target === this) this.classList.remove('visible');
+});
+
+/* Live validation on blur */
+['name','phone','product','qty'].forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener('blur', () => {
+    const errId = id + 'Err';
+    if(id === 'qty') showErr(errId, !parseInt(el.value) || parseInt(el.value) < 1);
+    else showErr(errId, !el.value.trim());
+  });
+  el.addEventListener('input', () => {
+    if(el.classList.contains('error')){
+      if(id === 'qty') showErr(id+'Err', !parseInt(el.value) || parseInt(el.value) < 1);
+      else showErr(id+'Err', !el.value.trim());
+    }
+  });
+});
+</script>
+</body>
+</html>
